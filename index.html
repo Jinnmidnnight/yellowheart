@@ -48,6 +48,10 @@
             display: flex;
             justify-content: space-between;
         }
+        .three-day {
+            display: flex;
+            justify-content: space-between;
+        }
         .title {
             display: flex;
             align-items: center;
@@ -79,6 +83,24 @@
         <h3 id='love'>0일째</h3>
         <h4 class="date">2022.01.01</h4>
     </div>
+    <hr class="three-day">
+    <section class="three-day">
+        <h3 class='title'>300일</h3>
+        <div class='date-box'>
+            <p id='three' class='days-left'>0일 남음</p>
+            <p id='three-date' class='date'>0000.00.00</p>
+        </div>
+    </section>
+    <hr class="three-day">
+    <hr class="special-day">
+    <section class='special-day'>
+        <h3 class='title'>1주년</h3>
+        <div class='date-box'>
+            <p id='thousand' class='days-left'>0일 남음</p>
+            <p id='thousand-date' class='date'>0000.00.00</p>
+        </div>
+    </section>
+    <hr class="special-day">
     <hr/>
         <h3 style="text-align:center;">우리의 추억♥</h1>
     <hr/>
@@ -169,6 +191,37 @@
             var height = screen.availHeight;
             var openImage = window.open('','_blank','width='+img_width+',height='+height+',top='+top+',left='+left+',menubars=no,scrollbars=auto');
             openImage.document.write("<style>body{margin:0px;}</style><a href = # onclick = window.close() onfocus=this.blur()><img src = '"+url+"'width='"+win_width+"'></a>");
+        }
+
+        var three = new Date(start.getTime() - (1000 * 60 * 60 * 9) + 999 * (300 * 60 * 60 * 24));
+        var threeDate = three.getFullYear() + '.' + (three.getMonth()+1) + '.' + three.getDate();
+        $('#three-date').text(threeDate);
+
+        var timeDiff4 = three.getTime() - now.getTime();
+        var day4 = Math.floor(timeDiff4 / (1000 * 60 * 60 * 24) + 1);
+        $('#three').text(day4 + '일 남음');
+
+        var thousand = new Date(start.getTime() - (1000 * 60 * 60 * 9) + 999 * (366 * 60 * 60 * 24));
+        var thousandDate = thousand.getFullYear() + '.' + (thousand.getMonth()+1) + '.' + thousand.getDate();
+        $('#thousand-date').text(thousandDate);
+
+        // thousand, now, getTime()
+        var timeDiff3 = thousand.getTime() - now.getTime();
+        var day3 = Math.floor(timeDiff3 / (1000 * 60 * 60 * 24) + 1);
+        $('#thousand').text(day3 + '일 남음');
+
+        if (day3 < 0) {
+            $('.special-day').hide();
+        }
+        else if (day3 == 0) {
+            $('#thousand').text('오늘!!');
+        }
+
+        if (day4 <= 0) {
+            $('.three-day').hide();
+        }
+        else if (day4 == 0) {
+            $('#three').text('오늘!!');
         }
     </script>
 </body>
